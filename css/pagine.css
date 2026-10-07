@@ -1,0 +1,242 @@
+/* ===== Apertura: la tavola ===== */
+.tavola { padding: 20px 0 var(--s-a); position: relative; }
+.tavola-g { display: grid; gap: 20px; }
+.tavola-testo h1 { margin-bottom: 10px; }
+.tavola-testo h1 em { font-style: normal; color: var(--vino); }
+.fiducia { display: inline-flex; align-items: center; gap: 8px; font-size: .95rem; color: var(--muted); text-decoration: none; padding: 4px 0; }
+.fiducia strong { color: var(--ink); }
+.fiducia svg { width: 16px; height: 16px; color: var(--oro-d); }
+.fiducia:hover { color: var(--vino); }
+
+.piano { position: relative; padding: 22px 18px 34px; border-radius: 6px; isolation: isolate; }
+.tovaglia { position: absolute; inset: 0; border-radius: 6px; z-index: -1; transform-origin: 50% 0; box-shadow: inset 0 0 0 1px hsl(26 28% 32% / .12), 0 18px 40px -24px hsl(26 40% 20% / .5); }
+.js .tovaglia { animation: stendi 1.15s var(--in) .15s both; }
+@keyframes stendi {
+  0% { clip-path: inset(0 0 100% 0 round 6px); transform: perspective(900px) rotateX(-24deg); }
+  60% { transform: perspective(900px) rotateX(3deg); }
+  100% { clip-path: inset(0 0 0 0 round 6px); transform: none; }
+}
+.foto-appoggiata { background: var(--bianco); padding: 6px 6px 6px; border-radius: 3px; box-shadow: var(--ombra); transform: rotate(-1.6deg); width: 92%; }
+.foto-appoggiata img { border-radius: 2px; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.js .foto-appoggiata { animation: posa .9s var(--in) .7s both; }
+@keyframes posa { from { opacity: 0; transform: translateY(-24px) rotate(-5deg) scale(1.03); } to { opacity: 1; transform: rotate(-1.6deg); } }
+
+/* segnaposto: cartoncino a tenda che gira */
+.segnaposto { position: absolute; right: 10px; bottom: -14px; width: min(58%, 260px); perspective: 900px; z-index: 2; }
+.js .segnaposto { animation: cade .8s var(--molla) 1.15s both; }
+@keyframes cade { from { opacity: 0; transform: translateY(-40px) rotate(8deg); } to { opacity: 1; transform: none; } }
+.sp-carta { position: relative; transform-style: preserve-3d; transition: transform .9s var(--molla); transform: rotate(2.5deg); }
+.sp-carta.giro { transform: rotate(2.5deg) rotateY(180deg); }
+.sp-faccia { backface-visibility: hidden; -webkit-backface-visibility: hidden; background: var(--avorio); border-radius: 3px; padding: 14px 14px 12px; text-align: center; box-shadow: 0 2px 0 hsl(36 30% 80%), 0 14px 26px -12px hsl(26 40% 20% / .6); border: 1px solid hsl(36 40% 80%); }
+.sp-faccia::before { content: ""; position: absolute; inset: 5px; border: 1px solid var(--oro-d); outline: 1px solid hsl(36 60% 30% / .35); outline-offset: -4px; border-radius: 2px; pointer-events: none; }
+.sp-retro { position: absolute; inset: 0; transform: rotateY(180deg); }
+.sp-emblema { width: 26px; margin: 0 auto 2px; }
+.sp-nome { display: block; font-family: var(--f-mano); font-size: clamp(1.55rem, 1.2rem + 1.6vw, 2.1rem); line-height: 1.15; color: var(--vino); }
+.sp-sotto { display: block; font-family: var(--f-sc); font-size: .72rem; letter-spacing: .1em; color: var(--muted); margin-top: 2px; }
+
+.scegli { margin-top: 32px; }
+.scegli-t { font-weight: 700; font-size: .95rem; margin: 0 0 10px; }
+.feste-chip { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 2px 2px 6px; margin: 0 -2px; list-style: none; }
+.feste-chip::-webkit-scrollbar { display: none; }
+.chip { flex: none; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid hsl(26 28% 32% / .4); background: var(--bianco); color: var(--ink); font: 600 .95rem/1 var(--f-txt); cursor: pointer; transition: background-color .25s var(--st), border-color .25s var(--st), color .25s var(--st), transform .2s var(--st); }
+.chip:hover { border-color: var(--vino); color: var(--vino); }
+.chip:active { transform: scale(.96); }
+.chip[aria-pressed="true"] { background: var(--vino); border-color: var(--vino); color: var(--lino); }
+.tavola-azioni { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; margin-top: 16px; }
+.tavola-azioni .btn { flex: 1 1 auto; }
+@media (min-width: 560px) { .tavola-azioni .btn { flex: 0 0 auto; } }
+.continua { display: flex; align-items: center; gap: 10px; margin-top: 28px; color: var(--muted); font-size: var(--t-sm); }
+.continua::after { content: ""; flex: 1; height: 1px; background: hsl(26 28% 32% / .25); }
+
+@media (min-width: 960px) {
+  .tavola { padding: 48px 0 var(--s-b); }
+  .tavola-g { grid-template-columns: 1fr 1.08fr; gap: 56px; align-items: center; }
+  .tavola-testo { order: 0; }
+  .piano { padding: 36px 34px 56px; }
+  .segnaposto { right: 18px; bottom: -22px; }
+}
+
+/* ===== Sezioni comuni ===== */
+.sez { padding: var(--s-b) 0; }
+.sez-testa { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; margin-bottom: 28px; }
+.sez-testa p { margin: 10px 0 0; color: var(--muted); max-width: 52ch; }
+.su-vino { background: var(--vino); color: var(--avorio); }
+.su-vino p { color: hsl(40 45% 92% / .92); }
+
+/* carosello a scatti */
+.caro { position: relative; }
+.caro-pista { display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gut); padding: 4px var(--gut) 16px; margin-inline: calc(-1 * var(--gut)); scrollbar-width: none; overscroll-behavior-x: contain; }
+.caro-pista::-webkit-scrollbar { display: none; }
+.caro-pista > * { scroll-snap-align: start; }
+@media (min-width: 640px) { .caro-pista { grid-auto-columns: 44%; } }
+@media (min-width: 1024px) { .caro-pista { grid-auto-columns: calc((100% - 3 * 18px - 2 * var(--gut)) / 3.4); gap: 18px; } }
+.caro-frecce { display: flex; gap: 8px; }
+.freccia { width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid hsl(26 28% 32% / .45); background: var(--bianco); color: var(--vino); display: grid; place-items: center; cursor: pointer; transition: background-color .25s var(--st), color .25s var(--st), opacity .25s var(--st), transform .2s var(--st); }
+.freccia svg { width: 22px; height: 22px; }
+.freccia:hover { background: var(--vino); color: var(--lino); border-color: var(--vino); }
+.freccia:active { transform: scale(.94); }
+.freccia:disabled { opacity: .35; pointer-events: none; }
+
+/* schede-invito delle feste */
+.invito { position: relative; display: block; text-decoration: none; color: var(--ink); background: var(--bianco); padding: 8px; border-radius: 2px; box-shadow: var(--ombra); transition: transform .35s var(--in), box-shadow .35s var(--st); }
+.invito:hover { transform: translateY(-4px); box-shadow: 0 2px 4px hsl(350 30% 15% / .08), 0 22px 40px -16px hsl(350 30% 15% / .38); color: var(--ink); }
+.invito:active { transform: translateY(-1px); }
+.invito img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1px; }
+.invito-t { padding: 14px 8px 8px; text-align: center; position: relative; }
+.invito-t::before { content: ""; position: absolute; left: 50%; top: 0; width: 44px; height: 1px; background: var(--oro-d); transform: translateX(-50%); }
+.invito-t span { display: block; font-family: var(--f-sc); font-size: .74rem; letter-spacing: .1em; color: var(--muted); }
+.invito-t strong { display: block; font: 400 1.35rem/1.2 var(--f-tit); margin-top: 4px; }
+
+/* fascia giardino */
+.giardino-g { display: grid; gap: 28px; align-items: center; }
+.giardino-foto { display: grid; grid-template-columns: 1.15fr 1fr; gap: 12px; align-items: end; }
+.giardino-foto img { width: 100%; border-radius: 3px; object-fit: cover; }
+.giardino-foto .f1 img { aspect-ratio: 3 / 4; }
+.giardino-foto .f2 { margin-bottom: -28px; }
+.giardino-foto .f2 img { aspect-ratio: 4 / 5; }
+.giardino-foto figcaption { font-size: var(--t-sm); color: hsl(40 45% 92% / .8); margin-top: 6px; }
+.giardino-testo h2 { margin-bottom: 14px; }
+.punti { list-style: none; padding: 0; margin: 20px 0 24px; display: grid; gap: 8px; }
+.punti li { display: flex; gap: 12px; align-items: baseline; }
+.punti li::before { content: ""; flex: none; width: 10px; height: 10px; transform: translateY(1px); background-image: linear-gradient(90deg, currentColor 50%, transparent 50%), linear-gradient(currentColor 50%, transparent 50%); background-size: 5px 5px; opacity: .8; }
+@media (min-width: 960px) { .giardino-g { grid-template-columns: 1.1fr 1fr; gap: 72px; } }
+
+/* piatti */
+.piatto { margin: 0; }
+.piatto img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 3px; }
+.piatto figcaption { padding-top: 10px; }
+.piatto strong { display: block; font: 400 1.2rem/1.25 var(--f-tit); }
+.piatto span { font-size: .95rem; color: var(--muted); }
+
+/* recensioni */
+.voti { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin-bottom: 24px; }
+.voti .num { font: 400 3rem/1 var(--f-tit); color: var(--vino); }
+.stelle { display: flex; gap: 2px; color: var(--oro-d); }
+.stelle svg { width: 18px; height: 18px; }
+.rec-lista { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 900px) { .rec-lista { grid-template-columns: 1fr 1fr; gap: 18px; } }
+.rec { background: var(--bianco); border-radius: 10px; padding: 22px 22px 18px; border: 1px solid hsl(26 28% 32% / .14); margin: 0; }
+.rec blockquote { margin: 0 0 12px; font-size: 1.04rem; }
+.rec blockquote p::before { content: "«"; } .rec blockquote p::after { content: "»"; }
+.rec blockquote p { margin: 0; }
+.rec figcaption { font-size: var(--t-sm); color: var(--muted); }
+.rec figcaption b { color: var(--ink); }
+.rec-azioni { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 22px; align-items: center; }
+
+/* chiusura */
+.chiusura { padding: var(--s-b) 0; }
+.chiusura-g { display: grid; gap: 28px; }
+.chiusura-card { background: var(--bianco); border-radius: 6px; padding: 28px 22px; box-shadow: var(--ombra); }
+.chiusura-card h2 { margin-bottom: 12px; }
+.info-r { list-style: none; padding: 0; margin: 18px 0 22px; display: grid; gap: 10px; }
+.info-r li { display: flex; gap: 12px; align-items: flex-start; }
+.info-r svg { width: 22px; height: 22px; flex: none; color: var(--vino); margin-top: 2px; }
+.oggi { display: inline-block; font-size: .8rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: var(--lino-2); color: var(--vino); margin-left: 6px; }
+@media (min-width: 960px) { .chiusura-g { grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; } .chiusura-card { padding: 40px; } }
+
+/* ===== Pagine interne ===== */
+.testa-p { padding: 20px 0 var(--s-a); }
+.testa-p h1 { margin: 6px 0 14px; }
+.testa-p p { color: var(--muted); max-width: 56ch; font-size: 1.08rem; }
+.indice { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; list-style: none; padding: 4px 0 2px; margin: 18px 0 0; }
+.indice::-webkit-scrollbar { display: none; }
+.indice a { display: block; white-space: nowrap; padding: 10px 16px; border-radius: 999px; background: var(--bianco); border: 1px solid hsl(26 28% 32% / .25); text-decoration: none; font-weight: 600; font-size: .95rem; color: var(--ink); transition: background-color .25s var(--st), color .25s var(--st); }
+.indice a:hover { background: var(--vino); color: var(--lino); }
+
+/* capitolo festa */
+.festa { padding: var(--s-a) 0; scroll-margin-top: 80px; }
+.festa + .festa { border-top: 1px solid hsl(26 28% 32% / .16); }
+.festa-g { display: grid; gap: 22px; }
+.festa-foto { background: var(--bianco); padding: 6px; border-radius: 2px; box-shadow: var(--ombra); transform: rotate(-1deg); max-width: 520px; }
+.festa:nth-child(even) .festa-foto { transform: rotate(1deg); }
+.festa-foto img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.festa-n { font-family: var(--f-mano); font-size: 2.2rem; color: var(--vino); line-height: 1; display: block; margin-bottom: 6px; }
+.festa h2 { margin-bottom: 14px; }
+.festa .punti { color: var(--vichy); }
+.festa .punti li { color: var(--ink); }
+@media (min-width: 900px) {
+  .festa-g { grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center; }
+  .festa:nth-child(even) .festa-foto { order: 2; justify-self: end; }
+}
+.serve { padding: var(--s-b) 0; }
+.serve-g { display: grid; gap: 28px; }
+.serve-lista { counter-reset: s; list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid hsl(40 45% 92% / .25); }
+.serve-lista li { padding: 16px 0; border-bottom: 1px solid hsl(40 45% 92% / .25); display: grid; grid-template-columns: 9rem 1fr; gap: 12px; }
+.serve-lista b { font-family: var(--f-sc); letter-spacing: .06em; color: var(--oro); font-weight: 400; }
+@media (max-width: 480px) { .serve-lista li { grid-template-columns: 1fr; gap: 2px; } }
+@media (min-width: 960px) { .serve-g { grid-template-columns: 1fr 1.2fr; gap: 72px; align-items: start; } }
+
+/* locale: galleria a mosaico verticale nel carosello */
+.foto-c { margin: 0; }
+.foto-c img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 3px; }
+.foto-c figcaption { font-size: .95rem; color: var(--muted); padding-top: 8px; }
+.su-vino .foto-c figcaption { color: hsl(40 45% 92% / .8); }
+.anni { display: grid; gap: 24px; align-items: center; }
+.anni-n { font: 400 clamp(5rem, 3rem + 10vw, 9rem)/.9 var(--f-tit); color: var(--vino); }
+.anni-n small { display: block; font-family: var(--f-mano); font-size: .3em; color: var(--oro-d); margin-top: 8px; }
+@media (min-width: 900px) { .anni { grid-template-columns: auto 1fr; gap: 64px; } }
+
+/* contatti */
+.contatti-g { display: grid; gap: 32px; padding-bottom: var(--s-b); }
+@media (min-width: 960px) { .contatti-g { grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: start; } }
+.orari-t { width: 100%; border-collapse: collapse; margin: 10px 0 0; }
+.orari-t th, .orari-t td { text-align: left; padding: 10px 0; border-bottom: 1px solid hsl(26 28% 32% / .16); font-weight: 400; }
+.orari-t th { font-weight: 700; }
+.orari-t tr.oggi-r th, .orari-t tr.oggi-r td { color: var(--vino); font-weight: 700; }
+.mappa { margin-top: 24px; border-radius: 6px; overflow: hidden; position: relative; display: grid; place-items: center; min-height: 220px; text-align: center; padding: 24px; color: var(--ink); }
+.mappa-in { background: hsl(40 40% 99% / .94); padding: 20px 22px; border-radius: 6px; box-shadow: var(--ombra); }
+.mappa-in p { margin: 0 0 12px; }
+.mappa iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.modulo { background: var(--bianco); border-radius: 10px; padding: 24px 20px; box-shadow: var(--ombra); }
+@media (min-width: 768px) { .modulo { padding: 36px; } }
+.modulo h2 { margin-bottom: 8px; }
+.campo { display: grid; gap: 6px; margin-top: 16px; }
+.campo label, .campo legend { font-weight: 700; font-size: .95rem; }
+.campo input, .campo select, .campo textarea { font: inherit; color: var(--ink); background: var(--lino); border: 1.5px solid hsl(26 28% 32% / .35); border-radius: 10px; padding: 12px 14px; min-height: 48px; width: 100%; transition: border-color .2s var(--st), box-shadow .2s var(--st); }
+.campo textarea { min-height: 96px; resize: vertical; }
+.campo input:hover, .campo select:hover, .campo textarea:hover { border-color: var(--vichy); }
+.campo input:focus, .campo select:focus, .campo textarea:focus { outline: 2px solid var(--vino); outline-offset: 1px; border-color: var(--vino); box-shadow: 0 0 0 3px hsl(353 43% 27% / .18); }
+.campo [aria-invalid="true"] { border-color: var(--errore); }
+.err { color: var(--errore); font-size: var(--t-sm); min-height: 1em; }
+.due { display: grid; gap: 0 14px; grid-template-columns: 1fr 1fr; }
+fieldset.campo { border: 0; padding: 0; margin: 16px 0 0; }
+.scelte { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.scelte label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1.5px solid hsl(26 28% 32% / .35); font-weight: 600; cursor: pointer; transition: background-color .2s var(--st), border-color .2s var(--st); }
+.scelte input { accent-color: var(--vino); width: 18px; height: 18px; }
+.scelte label:has(input:checked) { border-color: var(--vino); background: hsl(353 43% 27% / .07); }
+.nota { font-size: var(--t-sm); color: var(--muted); margin-top: 14px; }
+.modulo .btn { width: 100%; margin-top: 20px; }
+
+/* privacy / 404 */
+.testo-lungo { padding-bottom: var(--s-b); }
+.testo-lungo h2 { font-size: var(--t-3); margin: 32px 0 10px; }
+.nf { min-height: 60vh; display: grid; place-items: center; text-align: center; padding: var(--s-b) 0; }
+.nf .sp-nome { font-size: 3rem; }
+
+/* griglia dell'apertura: testo e scelta a sinistra, tavola a destra */
+@media (min-width: 960px) {
+  .tavola-g { grid-template-columns: 1fr 1.08fr; grid-template-areas: "testo piano" "scelta piano"; row-gap: 8px; }
+  .tavola-testo { grid-area: testo; align-self: end; }
+  .piano { grid-area: piano; }
+  .tavola-scelta { grid-area: scelta; align-self: start; }
+}
+.vichy-lieve { background: var(--lino-2); }
+.chiusura-foto img { width: 100%; border-radius: 6px; aspect-ratio: 16 / 10; object-fit: cover; }
+.tavola-g > *, .sez-testa > *, .giardino-g > *, .chiusura-g > *, .festa-g > *, .contatti-g > *, .serve-g > * { min-width: 0; }
+.chip { white-space: nowrap; }
+@media (max-width: 959px) {
+  .tavola { padding-top: 14px; }
+  .tavola-g { gap: 14px; }
+  .piano { padding: 16px 14px 26px; }
+  .scegli { margin-top: 18px; }
+}
+@media (max-width: 959px) {
+  .segnaposto { width: min(50%, 230px); right: 4px; bottom: -18px; }
+  .sp-faccia { padding: 10px 10px 9px; }
+  .sp-emblema { width: 20px; }
+  .sp-nome { font-size: 1.4rem; }
+  .sp-sotto { font-size: .62rem; }
+}
+@media (min-width: 960px) { .feste-chip { flex-wrap: wrap; overflow: visible; } }
+.consenso { display: flex; gap: 10px; align-items: flex-start; font-weight: 400 !important; font-size: .95rem; }
+.consenso input { width: 20px; height: 20px; margin-top: 3px; flex: none; accent-color: var(--vino); }
