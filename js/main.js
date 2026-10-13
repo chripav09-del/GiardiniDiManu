@@ -93,6 +93,31 @@ if (tavolo) {
   }));
 }
 
+// pagina feste: le feste come schede (senza JS restano tutte in fila, con i link all'ancora)
+const schede = document.querySelector("[data-schede]");
+if (schede) {
+  const tabs = [...schede.querySelectorAll("a")];
+  const pannelli = tabs.map((a) => document.querySelector(a.getAttribute("href")));
+  schede.setAttribute("role", "tablist");
+  schede.closest("main").classList.add("a-schede");
+  const mostra = (n, fuoco) => {
+    tabs.forEach((a, k) => { a.setAttribute("aria-selected", String(k === n)); a.tabIndex = k === n ? 0 : -1; pannelli[k].hidden = k !== n; });
+    if (!lento) { pannelli[n].classList.remove("entra"); void pannelli[n].offsetWidth; pannelli[n].classList.add("entra"); }
+    if (fuoco) tabs[n].focus();
+  };
+  tabs.forEach((a, k) => {
+    a.parentElement.setAttribute("role", "presentation");
+    a.setAttribute("role", "tab"); a.setAttribute("aria-controls", pannelli[k].id);
+    pannelli[k].setAttribute("role", "tabpanel");
+    a.addEventListener("click", (e) => { e.preventDefault(); mostra(k); history.replaceState(null, "", a.getAttribute("href")); });
+    a.addEventListener("keydown", (e) => {
+      const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (d) { e.preventDefault(); mostra((k + d + tabs.length) % tabs.length, true); }
+    });
+  });
+  mostra(Math.max(0, tabs.findIndex((a) => a.getAttribute("href") === location.hash)));
+}
+
 // orari: evidenzia oggi
 const oggi = (new Date().getDay() + 6) % 7; // 0 = lunedì
 document.querySelectorAll("[data-giorno]").forEach((r) => {

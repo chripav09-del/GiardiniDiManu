@@ -32,7 +32,7 @@
   --t-3: clamp(1.3rem, 1.1rem + .9vw, 1.75rem);
   --t-sm: .875rem;
 
-  --s-a: 48px; --s-b: 80px; --s-c: 128px;
+  --s-a: 36px; --s-b: 56px; --s-c: 96px;
   --gut: 16px;
   --max: 1180px;
 
@@ -41,7 +41,7 @@
   --molla: linear(0, .009, .035 2.1%, .141 4.4%, .723 12.9%, .938 16.7%, 1.017 19.4%, 1.067, 1.099 24.3%, 1.108 26%, 1.102, 1.083 30.6%, 1.011 39.1%, .993 43%, .987 47.5%, 1.003 61.2%, 1);
   --ombra: 0 1px 2px hsl(350 30% 15% / .08), 0 10px 30px -10px hsl(350 30% 15% / .28);
 }
-@media (min-width: 768px) { :root { --gut: 32px; --s-a: 64px; --s-b: 104px; --s-c: 160px; } }
+@media (min-width: 768px) { :root { --gut: 32px; --s-a: 56px; --s-b: 88px; --s-c: 136px; } }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }

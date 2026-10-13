@@ -387,3 +387,60 @@ body:has([data-pren]) .wa-flu { display: none; }
 
 .arrivare::before { content: ""; display: block; height: 12px; background-image: linear-gradient(90deg, var(--vichy-a) 50%, transparent 50%), linear-gradient(var(--vichy-a) 50%, transparent 50%); background-size: 12px 12px; }
 .chiusura-foto img { object-position: 50% 40%; }
+
+/* ===== Giro «più rustico e più ordinato» 13/10 =====
+   Ogni sezione è un oggetto della tavola: tovaglia a quadretti, tagliere di legno, carta (segnaposto, bigliettini, menù). */
+
+/* grana di carta leggerissima sul fondo lino */
+body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .22 0 0 0 0 .14 0 0 0 .075 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* il tagliere: la sezione cucina poggia su assi di legno */
+.legno {
+  --legno: hsl(26 40% 24%);
+  position: relative; color: var(--avorio);
+  background-color: var(--legno);
+  background-image:
+    radial-gradient(120% 90% at 50% 40%, transparent 55%, hsl(24 45% 10% / .45)),
+    repeating-linear-gradient(180deg, transparent 0 158px, hsl(24 45% 9% / .55) 158px 160px, hsl(32 40% 40% / .18) 160px 161px, transparent 161px 320px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1100' height='320'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0028 0.075' numOctaves='4' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0.10 0 0 0 0 0.05 0 0 0 0 0.02 0 0 0 1.6 -0.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='260'%3E%3Cfilter id='h'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006 0.22' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.62 0 0 0 0 0.44 0 0 0 0 0.27 0 0 0 1.2 -0.62'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23h)'/%3E%3C/svg%3E");
+  box-shadow: inset 0 10px 18px -10px hsl(24 45% 6% / .7), inset 0 -10px 18px -10px hsl(24 45% 6% / .7);
+}
+.legno h2 { color: var(--bianco); }
+.legno .sopra { color: var(--oro); }
+.legno .sez-testa p, .legno .piatto span { color: hsl(40 45% 92% / .86); }
+.legno .piatto strong { color: var(--bianco); }
+.legno .piatto img { border-radius: 4px; box-shadow: 0 14px 26px -12px hsl(24 45% 6% / .8); }
+.legno .link-f { color: var(--avorio); }
+.legno .link-f:hover { color: var(--bianco); }
+.legno :focus-visible { outline-color: var(--oro); }
+
+/* recensioni: bigliettini di carta fermati col nastro */
+.rec-sez .voti { margin: 0; font-size: inherit; }
+.voti-s { font: 400 1rem/1.3 var(--f-txt); color: var(--muted); }
+.bigliettini { list-style: none; margin-top: 0; margin-bottom: 0; padding-top: 20px; padding-bottom: 22px; }
+.bigliettino { position: relative; }
+.bigliettino .rec { position: relative; height: 100%; background: hsl(42 55% 96%); border: 0; border-radius: 2px; padding: 28px 20px 18px; transform: rotate(-1.1deg); box-shadow: 0 1px 1px hsl(30 30% 20% / .1), 0 14px 26px -16px hsl(30 40% 20% / .5); }
+.bigliettino:nth-child(even) .rec { transform: rotate(.9deg); }
+.bigliettino .rec::before { content: ""; position: absolute; top: -11px; left: 50%; width: 86px; height: 24px; transform: translateX(-50%) rotate(-2.5deg); background: hsl(40 40% 82% / .78); box-shadow: 0 1px 2px hsl(30 30% 20% / .18); }
+.bigliettino:nth-child(even) .rec::before { transform: translateX(-50%) rotate(2deg); }
+.bigliettino blockquote { font-size: 1.02rem; }
+.bigliettino blockquote p::before, .bigliettino blockquote p::after { font-family: var(--f-tit); color: var(--vino); font-size: 1.2em; }
+.rec-sez .rec-azioni { margin-top: 8px; }
+
+/* chiusura e piede più compatti sul telefono */
+@media (max-width: 959px) {
+  .chiusura-foto { display: none; }
+  .chiusura { padding: var(--s-a) 0; }
+}
+.piede { padding: var(--s-b) 0 88px; }
+@media (max-width: 899px) { .piede .logo-p { width: 112px; } .piede-g { gap: 28px; } .piede-legale { margin-top: 32px; } }
+
+/* pagina feste: le feste diventano schede (senza JS restano tutte in fila) */
+.indice a[aria-selected="true"] { background: var(--vino); border-color: var(--vino); color: var(--lino); }
+.a-schede .festa[hidden] { display: none; }
+.a-schede .festa + .festa { border-top: 0; }
+.a-schede .festa { padding-top: 24px; }
+.festa.entra { animation: passo-dx .45s var(--in) backwards; }
+@media (max-width: 899px) { .festa-foto img { aspect-ratio: 4 / 3; } .festa-foto { max-width: none; } }
+.a-schede .indice { flex-wrap: wrap; overflow: visible; }
