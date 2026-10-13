@@ -384,3 +384,6 @@ body:has([data-pren]) .wa-flu { display: none; }
 .pren-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 26px; padding-top: 18px; border-top: 1px solid hsl(26 28% 32% / .14); }
 .pren-nav[hidden], .pren-nav [hidden] { display: none; }
 .pren-nav .btn-p { margin-left: auto; min-width: 150px; }
+
+.arrivare::before { content: ""; display: block; height: 12px; background-image: linear-gradient(90deg, var(--vichy-a) 50%, transparent 50%), linear-gradient(var(--vichy-a) 50%, transparent 50%); background-size: 12px 12px; }
+.chiusura-foto img { object-position: 50% 40%; }
